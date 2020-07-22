@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<!--
+* Bootstrap Simple Admin Template
+* Email: heyalexluna@gmail.com
+* Version: 1.1
+* Author: Alexis Luna
+* Copyright 2019 Alexis Luna
+* Website: https://github.com/mralexisluna/bootstrap-simple-admin-template
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>首页</title>
+	<link th:href="@{/vendor/bootstrap4/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/master.css}" rel="stylesheet">
+	<link th:href="@{/vendor/chartsjs/Chart.min.css}" rel="stylesheet">
+	<link th:href="@{/vendor/flagiconcss3/css/flag-icon.min.css}" rel="stylesheet">
 </head>
+
 <body>
-	your permission
+<div class="wrapper">
+	<div th:replace="common/sidebar"></div>
+	<div id="body" class="active">
+		<div th:replace="common/nav"></div>
+		<div class="content">
+			<div class="container-fluid">
+				<shiro:hasAnyRoles name="admin,user">
+					<button>13</button>
+				</shiro:hasAnyRoles>
+			</div>
+		</div>
+	</div>
+</div>
+<script th:src="@{/vendor/jquery3/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/vendor/bootstrap4/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/fontawesome5/js/solid.min.js}"></script>
+<script th:src="@{/vendor/fontawesome5/js/fontawesome.min.js}"></script>
+<!--    <script th:src="@{/vendor/chartsjs/Chart.min.js}"></script>-->
+<!--    <script th:src="@{/js/dashboard-charts.js}"></script>-->
+<script th:src="@{/vendor/DataTables/datatables.min.js}"></script>
+<script th:src="@{/js/initiate-datatables.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<script th:inline="javascript">
+	var user = [[${curUser}]];
+	console.log(user);
+</script>
 </body>
 </html>

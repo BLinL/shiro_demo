@@ -1,23 +1,24 @@
 package com.bliu.sd.shiro;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.spring.config.ShiroAnnotationProcessorConfiguration;
-import org.apache.shiro.spring.config.ShiroBeanConfiguration;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.spring.web.config.ShiroWebConfiguration;
-import org.apache.shiro.spring.web.config.ShiroWebFilterConfiguration;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Configuration
 public class ShiroConfig {
+
+    @Value(value = "${shiro.anon}")
+    private String anonURL;
 
     @Bean
     public MyRealm shiroRealm(){
@@ -44,14 +45,18 @@ public class ShiroConfig {
         filterMap.put("/logout","logout");
         filterMap.put("/api/login","anon");
         filterMap.put("/api/register","anon");
-        filterMap.put("/api/user/add","anon");
         filterMap.put("/api/user/save","anon");
         filterMap.put("/api/user/login","anon");
-        filterMap.put("/api/user/login/prev","anon");
         filterMap.put("/**","authc");
 
+        String[] anons = anonURL.split(",");
+        for (int i = 0; i < anons.length; i++) {
+            log.info("anon url:[{}]",anons[i]);
+            filterMap.put(anons[i],"anon");
+        }
+
         shiroFilterFactoryBean.setLoginUrl("/api/login");
-        shiroFilterFactoryBean.setSuccessUrl("/api/index");
+        shiroFilterFactoryBean.setSuccessUrl("/api/user/login/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/api/nopermission");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 @RequestMapping(value = "/api/user")
 public class UserController {
@@ -29,11 +32,11 @@ public class UserController {
         return mv;
     }
 
-    //init default user
-    @RequestMapping(value = "/add")
-    public ModelAndView showUser(Model model){
-        model.addAttribute("user",new User());
-        ModelAndView mv = new ModelAndView("register");
+    @RequestMapping(value = "/list")
+    public ModelAndView showUserList(Model model){
+        List<User> userList = userService.getAllUser();
+        ModelAndView mv = new ModelAndView("userList");
+        mv.addObject("userList",userList);
         return mv;
     }
 }

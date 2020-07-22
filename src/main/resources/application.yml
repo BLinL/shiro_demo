@@ -8,9 +8,16 @@ spring:
     password: 168168
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-
+  thymeleaf:
+    cache: false
+  mvc:
+    static-path-pattern: /**
 
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: com.bliu.entity
+
+shiro:
+  anon: /components/**,/css/**,/font/**,/img/**,/js/**,/vender/**
+
 
