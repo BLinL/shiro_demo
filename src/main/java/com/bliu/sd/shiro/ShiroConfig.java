@@ -43,8 +43,8 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String,String> filterMap = new HashMap<>();
         filterMap.put("/logout","logout");
-        filterMap.put("/api/login","anon");
-        filterMap.put("/api/register","anon");
+        filterMap.put("/login","anon");
+        filterMap.put("/register","anon");
         filterMap.put("/api/user/save","anon");
         filterMap.put("/api/user/login","anon");
         filterMap.put("/**","authc");
@@ -55,9 +55,9 @@ public class ShiroConfig {
             filterMap.put(anons[i],"anon");
         }
 
-        shiroFilterFactoryBean.setLoginUrl("/api/login");
-        shiroFilterFactoryBean.setSuccessUrl("/api/user/login/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/api/nopermission");
+        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setSuccessUrl("/homepage");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/nopermission");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }

@@ -1,5 +1,7 @@
 package com.bliu.sd.entity;
 
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +13,7 @@ import java.util.Arrays;
  *
  * @author 
  */
+@ToString
 public class Role implements Serializable {
     /**
      *
