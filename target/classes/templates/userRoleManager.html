@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>角色管理</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<!--  <a th:href="@{/userInfo/userAdd}">添加用户</a>
+  <a th:href="@{/userInfo/userDel}">删除用户</a>
+  <a th:href="@{/userInfo/userList}">查看用户列表</a>-->
+
+<ul class="table" th:each="user:${userList}">
+  <li class="table-row">
+    <div class="table-column">[[${user.uid}]]</div>
+    <div class="table-column">[[${user.username}]]</div>
+    <div class="table-column">[[${user.salt}]]</div>
+    <div class="table-column">[[${user.state}]]</div>
+  </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+<h3>用户添加界面</h3>
+<span style="color: darkred" th:text="${msg}"></span>
+<form th:action="@{/userInfo/userAdd}" th:method="POST">
+    <label id="username">
+        用户名
+        <input name="username" />
+    </label>
+
+    <br/>
+    <label id="password">
+        用户密码
+        <input type="password" name="password" />
+    </label>
+
+    <button type="submit">提交</button>
+</form>
+</body>
+</html>

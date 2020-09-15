@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UserInfo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+</head>
+
+<body>
+<h3>用户管理界面</h3>
+<p th:text="${msg}"></p>
+<button id="newUserBtn" class="btn-primary">新建</button>
+<button id="updateUserBtn" class="btn-primary">修改</button>
+<ul class="table">
+    <li class="table-row">
+        <div class="table-column">id</div>
+        <div class="table-column">用户名</div>
+        <div class="table-column">盐</div>
+        <div class="table-column">状态</div>
+        <div class="table-column">操作</div>
+    </li>
+</ul>
+<ul class="table" th:each="user:${userList}">
+    <input th:id="${user.uid}" type="checkbox"/>
+    <li class="table-row">
+        <div class="table-column">[[${user.uid}]]</div>
+        <div class="table-column">[[${user.username}]]</div>
+        <div class="table-column">[[${user.salt}]]</div>
+        <div class="table-column" th:text="${user.state} == 0?'激活':'未激活'">激活</div>
+        <div class="table-column">
+            <form th:action="@{/userInfo/userDel}" th:method="delete">
+                <input hidden name="uid" th:value="${user.uid}">
+                <button style="cursor: grab" type="submit">删除</button>
+            </form>
+        </div>
+    </li>
+</ul>
+</body>
+<script>
+    $("#newUserBtn").click(()=>{
+        bootbox.dialog({
+            title:'userAdd',
+            message: '<form id="userForm" action="/userInfo/userAdd" method="POST">' +
+                '用户名<input name="username"/>' +
+                '密码<input type="password" name="password"/>' +
+                '<button>提交</button>' +
+                '</form>'
+        });
+    });
+
+</script>
+</html>

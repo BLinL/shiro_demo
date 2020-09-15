@@ -1,0 +1,18 @@
+.table {
+  display: table;
+}
+.table-row {
+  display: table-row;
+  border: 1px solid #ccc;
+  margin: 0;
+}
+.table-row:hover{
+  background-color: cadetblue;
+}
+
+.table-column {
+  display: table-cell;
+  border: 1px solid #ccc;
+  width: 200px;
+  overflow: auto;
+}
