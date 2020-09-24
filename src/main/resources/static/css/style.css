@@ -7,12 +7,12 @@
   margin: 0;
 }
 .table-row:hover{
-  background-color: cadetblue;
+  background-color: navajowhite;
 }
 
 .table-column {
   display: table-cell;
   border: 1px solid #ccc;
-  width: 200px;
+  width: 300px;
   overflow: auto;
 }

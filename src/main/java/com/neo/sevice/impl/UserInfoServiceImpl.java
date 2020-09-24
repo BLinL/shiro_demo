@@ -3,6 +3,7 @@ package com.neo.sevice.impl;
 import com.neo.dao.UserInfoDao;
 import com.neo.model.UserInfo;
 import com.neo.sevice.UserInfoService;
+import com.neo.util.CredentialUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,6 +30,16 @@ public class UserInfoServiceImpl implements UserInfoService {
         UserInfo ret = userInfoDao.save(userInfo);
         System.out.println("ret:"+ret);
         return ret != null;
+    }
+
+    @Override
+    public boolean update(UserInfo userInfo) {
+        UserInfo oldValue = userInfoDao.findByUid(userInfo.getUid());
+        oldValue.setName(userInfo.getName());
+        oldValue.setSalt(CredentialUtil.hash(userInfo.getPassword()));
+        oldValue.setPassword(CredentialUtil.hash(userInfo.getPassword(),oldValue.getCredentialsSalt()));
+
+        return save(oldValue);
     }
 
     @Override

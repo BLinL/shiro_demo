@@ -11,5 +11,7 @@ public interface UserInfoService {
 
     boolean save(UserInfo userInfo);
 
+    boolean update(UserInfo userInfo);
+
     void delByUid(int uid);
 }

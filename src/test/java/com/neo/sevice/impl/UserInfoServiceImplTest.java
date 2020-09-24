@@ -22,4 +22,12 @@ public class UserInfoServiceImplTest {
     Iterable<UserInfo> userList = userInfoService.findAll();
     userList.forEach(System.out::println);
   }
+
+  @Test
+  public void updateUser(){
+    UserInfo user = userInfoService.findByUsername("admin");
+    user.setState((byte) 1);
+    userInfoService.save(user);
+    System.out.println(user);
+  }
 }
